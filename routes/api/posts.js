@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
 
 async function loadPostsCollection() {
   const client = await mongodb.MongoClient.connect(
-    'mongodb://localhost:27017/test',
+    'mongodb+srv://realbenfica:14211421@cluster0-st6ez.mongodb.net/test?retryWrites=true',
     {
       useNewUrlParser: true
     }
