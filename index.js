@@ -9,8 +9,10 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const permissions = require('./routes/api/permissions');
-
 app.use('/api/permissions', permissions);
+
+const roles = require('./routes/api/roles');
+app.use('/api/roles', roles);
 
 // Handle production
 if (process.env.NODE_ENV === 'production') {
