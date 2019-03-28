@@ -8,9 +8,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-const posts = require('./routes/api/posts');
+const permissions = require('./routes/api/permissions');
 
-app.use('/api/posts', posts);
+app.use('/api/permissions', permissions);
 
 // Handle production
 if (process.env.NODE_ENV === 'production') {

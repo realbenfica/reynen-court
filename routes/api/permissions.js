@@ -5,22 +5,23 @@ const router = express.Router();
 
 // Get Posts
 router.get('/', async (req, res) => {
-  const posts = await loadPostsCollection();
-  res.send(await posts.find({}).toArray());
+  const permissions = await loadPermissionsCollection();
+  res.send(await permissions.find({}).toArray());
 });
 
 // Add Post
 router.post('/', async (req, res) => {
-  const posts = await loadPostsCollection();
-  await posts.insertOne({
-    text: req.body.text,
-    createdAt: new Date()
+  const permissions = await loadPermissionsCollection();
+  await permissions.insertOne({
+    resource_name: req.body.resource_name, 
+    module_name: req.body.module_name, 
+    permission_name: req.body.permission_name
   });
   res.status(201).send();
 });
 
 
-async function loadPostsCollection() {
+async function loadPermissionsCollection() {
   const client = await mongodb.MongoClient.connect(
     'mongodb+srv://realbenfica:14211421@cluster0-st6ez.mongodb.net/test?retryWrites=true',
     {
@@ -28,7 +29,7 @@ async function loadPostsCollection() {
     }
   );
 
-  return client.db('vue_express').collection('posts');
+  return client.db('dashboard').collection('permissions');
 }
 
 module.exports = router;
